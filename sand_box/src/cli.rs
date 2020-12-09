@@ -1,11 +1,9 @@
 use std::env;
-use std::process;
 
 pub fn run() {
     let args: Vec<String> = env::args().collect();
     if args.len() <= 1 {
-        println!("No arguements given!");
-        process::exit(1);
+        panic!("No arguements given!");
     }
     let command = args[1].clone();
     let name = "Brad";
