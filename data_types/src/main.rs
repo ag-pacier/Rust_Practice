@@ -16,4 +16,20 @@ fn main() {
     let remainder = y % x;
 
     println!("Sum: {}, Difference: {}, Product: {}, Division: {}, Remainder: {}", sum, difference, product, quotient, remainder);
+
+    // tuple declaration
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    //deconstruct tuple
+    let (x, y, z) = tup;
+
+    println!("The new value of y is: {}", y);
+    println!("The other values are: {} {}", x, z);
+
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+    let five_hundred = x.0;
+    let six_point_four = x.1;
+    let one = x.2;
+
+    println!("{:?}", x);
+    println!("Split out as {} {} and {}", five_hundred, six_point_four, one);
 }
