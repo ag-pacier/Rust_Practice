@@ -30,6 +30,23 @@ struct Rectangle {
     height: u32,
 }
 
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    fn square(size: u32) -> Rectangle {
+        Rectangle {
+            width: size,
+            height: size,
+        }
+    }
+}
+
 fn main() {
     tu_second();
     println!("Now using structs!");
@@ -41,6 +58,24 @@ fn main() {
     //Test the # formatting
     println!("Also better formatted: {:#?}", rect1);
     println!("The area of the rectangle is {} square pixels.", st_area(&rect1));
+
+    println!("Now using a method attached to the Rectangle struct: {}", rect1.area());
+
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
+    let rect4 = Rectangle::square(6);
+    println!("rect4 using square: {:?}", rect4);
 
 }
 
