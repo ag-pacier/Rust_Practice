@@ -37,6 +37,19 @@ fn main() {
     let s3 = takes_and_gives_back(s2);
 
     println!("s1: {}, s3: {}", s1, s3);
+
+    //Returning stuff as a tuple, passing a string and getting
+    //the string back to see the length. They are trying to prove a point
+    //and I need practice
+    let s1 = String::from("hello");
+    let (s2, len) = calculate_length(s1);
+
+    println!("The length of {} is {}", s2, len);
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+    (s, length)
 }
 
 fn takes_ownership(some_string: String) {
