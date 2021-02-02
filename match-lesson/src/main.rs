@@ -43,4 +43,19 @@ fn main() {
     let five = Some(5);
     let six = plus_one(five);
     let none = plus_one(None);
+
+    //section 6.3
+
+    //Verbose way using match
+    let some_u8_value = Some(0u8);
+    match some_u8_value {
+        Some(3) => println!("three"),
+        _ => (),
+    }
+    //More concise way using if let but less thorough
+    //I like this line "...you can think of if let as syntax sugar for a match that runs code when the value matches one pattern and then ignores all other values"
+    if let Some(3) = some_u8_value {
+        println!("three");
+    }
+
 }
