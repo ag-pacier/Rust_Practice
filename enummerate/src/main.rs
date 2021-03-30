@@ -18,3 +18,7 @@ fn main() {
     //let loopback = IpAddr::V6(String::from("::1"));
 
 }
+
+//The major difference between STRUCTs and ENUMs is that STRUCTs can have multiple values. Like an AND.
+//ENUMs are an OR so in the above example, an IpAddress will always be EITHER V4 OR V6. I can't store both in there
+//SO: IpAddress::V4(192,168,0,1) but nothing about V6
