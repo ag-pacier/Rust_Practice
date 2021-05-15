@@ -1,6 +1,8 @@
 pub trait Summary {
+    fn summarize_author(&self) -> String;
+
     fn summarize(&self) -> String {
-        String::from("(Read More...)")
+        format!("(Read more from {}...)", self.summarize_author())
      }
 }
 
@@ -12,9 +14,9 @@ pub struct NewsArticle {
 }
 
 impl Summary for NewsArticle {
-    //fn summarize(&self) -> String {
-    //    format!("{}, by {} ({})", self.headline, self.author, self.location)
-    //}
+    fn summarize_author(&self) -> String {
+        format!("{}", self.author)
+    }
 }
 
 pub struct Tweet {
@@ -25,11 +27,24 @@ pub struct Tweet {
 }
 
 impl Summary for Tweet {
-    fn summarize(&self) -> String {
-        format!("{}: {}", self.username, self.content)
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
     }
 }
 
+fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+/*
+Above is the simplest way but not the only way to implement a function using a trait.
+The "trait bound" way to do it:
+fn notify<T: Summary>(item: &T)
+If you want to do more variables:
+fn notify(item1: &impl Summary, item2: &impl Summary)
+Lastly, if they need to be the same type:
+fn notify<T: Summary>(item1: &T, item2: &T)
+
+*/
 fn main() {
     //Traits tell the compiler what kinds of things a generic can do
     //Other languages may call them interfaces
