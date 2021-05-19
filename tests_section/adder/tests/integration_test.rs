@@ -1,6 +1,6 @@
-use addr;
+use adder;
 
 #[test]
 fn it_takes_two() {
-    assert_eq!(4, addr::add_two(2));
+    assert_eq!(4, adder::add_two(2));
 }
