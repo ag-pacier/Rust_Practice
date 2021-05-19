@@ -1,6 +1,7 @@
 use std::thread;
 use std::time::Duration;
 
+#[allow(dead_code)]
 fn simulated_expensive_calculation(intensity: u32) -> u32 {
     println!("Calculating slowly...");
     thread::sleep(Duration::from_secs(2));
@@ -8,16 +9,18 @@ fn simulated_expensive_calculation(intensity: u32) -> u32 {
 }
 
 fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_result = simulated_expensive_calculation(intensity);
+    let expensive_result = |num:u32| -> u32 { println!("Calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num };
 
     if intensity < 25 {
         println!(
             "Today, do {} pushups!",
-            expensive_result
+            expensive_result(intensity)
             );
         println!(
             "Next, do {} situps!",
-            expensive_result
+            expensive_result(intensity)
             );
     } else {
         if random_number == 3 {
@@ -25,7 +28,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } else {
             println!(
                 "Today, run for {} minutes!",
-                expensive_result
+                expensive_result(intensity)
             );
         }
     }
