@@ -1,14 +1,14 @@
 use std::thread;
 use std::time::Duration;
 
-fn simulated_expensive_calculation(insensity: u32) -> u32 {
+fn simulated_expensive_calculation(intensity: u32) -> u32 {
     println!("Calculating slowly...");
     thread::sleep(Duration::from_secs(2));
-    insensity
+    intensity
 }
 
-fn generate_workout(insensity: u32, random_number: u32) {
-    if insensity < 25 {
+fn generate_workout(intensity: u32, random_number: u32) {
+    if intensity < 25 {
         println!(
             "Today, do {} pushups!",
             simulated_expensive_calculation(intensity)
