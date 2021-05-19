@@ -1,3 +1,3 @@
 */target
-tests/adder/target*
-tests/10.2/next/target*
+tests_section/adder/target*
+tests_section/10.2/next/target*
