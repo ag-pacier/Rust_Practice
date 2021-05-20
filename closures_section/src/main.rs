@@ -65,9 +65,14 @@ fn generate_workout(intensity: u32, random_number: u32) {
     }
 }
 
-fn main() {
+#[allow(dead_code)]
+fn run() {
     let simulated_user_specified_value = 10;
     let simulated_random_number = 7;
 
     generate_workout(simulated_user_specified_value, simulated_random_number);
+}
+
+fn main() {
+    
 }
