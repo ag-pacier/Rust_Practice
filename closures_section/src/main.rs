@@ -82,3 +82,9 @@ fn main() {
 
     assert!(equal_to_x(y));
 }
+// Okay, now to explain to my future self so I don't forget:
+//The big difference here between closures and functions is that closures can use variables within the scope they are declared
+//So if we make equal_to_x a function, suddenly it doesn't work since what's in the function is out of scope of wherever it is placed
+//Closures have three patterns, they either take ownership of the variable (FnOnce) or the borrow the variable mutably (FnMut) or borrow immutably (Fn)
+
+//I spent an hour staring at the rust book trying to understand this and I think I got it now
