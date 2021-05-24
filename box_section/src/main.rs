@@ -5,7 +5,7 @@ enum List {
 
 use crate::List::{Cons, Nil};
 
-[#allow(dead_code)]
+#[allow(unused_variables)]
 fn main() {
     let b = Box::new(5);
     println!("b = {}", b);
