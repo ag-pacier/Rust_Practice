@@ -1,9 +1,20 @@
 use crate::List::{Cons, Nil};
 use std::ops::Deref;
+use std::mem::drop;
 
 enum List {
     Cons(i32, Box<List>),
     Nil,
+}
+
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data '{}'!", self.data);
+    }
 }
 
 struct MyBox<T>(T);
@@ -24,6 +35,10 @@ impl<T> Deref for MyBox<T> {
     fn deref(&self) -> &T {
         &self.0
     }
+}
+
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
 }
 
 #[allow(unused_variables)]
@@ -47,5 +62,26 @@ fn main() {
     assert_eq!(5, x);
     assert_eq!(5, *y);
 
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);
+
+    let c = CustomSmartPointer {
+        data: String::from("my stuff"),
+    };
+
+    let d = CustomSmartPointer {
+        data: String::from("other stuff"),
+    };
+
+    println!("CustomSmartPointers created.");
+
+    // Drop runs automatically once the vars go out of scope. However!
+    // If you want to clean up something early, like to open a lock for something else, it's not so straight forward
+    // You can't just call drop early using d.drop() ! It won't compile. Doing so would create a "double free" error where
+    // Rust drops the value when you call it and again once it officially goes out of scope so you need to use std::mem::drop
+    // and call the function on it:
+    drop(c);
+
+    println!("CustomSmartPointer c dropped before the end of main!");
 
 }
