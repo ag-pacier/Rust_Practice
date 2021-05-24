@@ -1,9 +1,30 @@
+use crate::List::{Cons, Nil};
+use std::ops::Deref;
+
 enum List {
     Cons(i32, Box<List>),
     Nil,
 }
 
-use crate::List::{Cons, Nil};
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+// In order to implement the Deref trait, we need to use type Target = T; which is covered more later :(
+// we create the related function deref so we can implement dereferencing on our new struct
+// deref returns a reference to the value we want to access with the * operator
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
 
 #[allow(unused_variables)]
 fn main() {
@@ -18,6 +39,13 @@ fn main() {
 
     // Box<T> implements the Drop trait which means after it goes out of scope, Rust can clean up the data
     // It also implements the Deref trait so that the data on the heap can be pulled
+
+    // Because Box can use Deref, this works:
+    let x = 5;
+    let y = MyBox::new(x);
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
 
 
 }
