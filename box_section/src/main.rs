@@ -5,6 +5,7 @@ enum List {
 
 use crate::List::{Cons, Nil};
 
+[#allow(dead_code)]
 fn main() {
     let b = Box::new(5);
     println!("b = {}", b);
@@ -18,5 +19,5 @@ fn main() {
     // Box<T> implements the Drop trait which means after it goes out of scope, Rust can clean up the data
     // It also implements the Deref trait so that the data on the heap can be pulled
 
-    
+
 }
